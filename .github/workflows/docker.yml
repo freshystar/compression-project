@@ -3,7 +3,7 @@ name: compression-tool
 on:
   push:
     branches: master
-    paths: compressor-project/**
+    paths: 'compressor-project/**/*'
 
 jobs:
   build-and-push:
@@ -26,8 +26,8 @@ jobs:
       - name: Build and push Rust Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./compressor-project/rust-compressor
-          file: ./compressor-project/rust-compressor/Dockerfile
+          context: compressor-project/rust-compressor
+          file: compressor-project/rust-compressor/Dockerfile
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
@@ -35,8 +35,8 @@ jobs:
       - name: Build and push JS Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./compressor-project/js-compressor
-          file: ./compressor-project/js-compressor/Dockerfile
+          context: compressor-project/js-compressor
+          file: compressor-project/js-compressor/Dockerfile
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
