@@ -7,7 +7,7 @@ This is a compression and decompression tool that has been implemented both in r
 - `LZ77`: is a compression algorithm that finds repeated patterns in the input data and replaces them with a reference to the previous occurrence.
 
 ## 📚Usage
-- Clone this repository and do;
+- Clone this repository and do:
  **Rust Implementation**
  ```rs
  cargo build
