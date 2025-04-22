@@ -3,11 +3,13 @@ name: compression-tool
 on:
   push:
     branches: master
+    paths: 'compressor-project/**'
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-22.04
     permissions:
+      contents: read
       packages: write
     
     steps:
@@ -21,11 +23,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Build Project
+      - name: Build and push Rust Docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./compressor-project/rust-compressor
+          file: ./compressor-project/rust-compressor/Dockerfile
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.run_number }}  
+      - name: Build and push JS Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./compressor-project/js-compressor
+          file: ./compressor-project/js-compressor/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.run_number }}  
+
