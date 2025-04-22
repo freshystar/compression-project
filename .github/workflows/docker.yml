@@ -26,7 +26,7 @@ jobs:
       - name: Build and push Rust Docker image
         uses: docker/build-push-action@v4
         with:
-          context: compressor-project/rust-compressor
+          context: ./rust-compressor
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
@@ -34,7 +34,7 @@ jobs:
       - name: Build and push JS Docker image
         uses: docker/build-push-action@v4
         with:
-          context: compressor-project/js-compressor
+          context: ./js-compressor
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
